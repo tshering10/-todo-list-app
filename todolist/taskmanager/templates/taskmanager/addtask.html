@@ -1,0 +1,9 @@
+{% extends "taskmanager/base.html" %}
+{% block title %}Add New{% endblock title %}
+{% block content %}
+    <form method='post'>
+        {% csrf_token %}
+        {{ form }}
+        <button type='submit'>Add</button>
+    </form>
+{% endblock content %}

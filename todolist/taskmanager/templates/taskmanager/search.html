@@ -1,13 +1,9 @@
 {% extends "taskmanager/base.html" %}
-{% block title %}My Todo{% endblock title %}
+{% block title %}Search{% endblock title %}
 {% block content %}
-   
     <div class="container mt-5">
-        <h1 class="mb-4">Your Tasks</h1>
-        <div class="add-task">
-            <a href="{% url "add_task" %}" class='d-flex text-decoration-none'>+ New</a>
-        </div>
         {% if tasks %}
+        <h5>You searched for '{{ query }}'</h5>
             <table class="table table-bordered table-striped">
                 <thead class="thead-dark">
                     <tr>
@@ -30,11 +26,6 @@
                     {% endfor %}
                 </tbody>
             </table>
-        {% else %}
-            <div class="alert alert-info" role="alert">
-                No tasks available. Please add a task!
-            </div>
         {% endif %}
-                     
-    </div>
+        </div>
 {% endblock content %}

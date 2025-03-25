@@ -20,7 +20,7 @@
                     {% for task in tasks %}
                         <tr>
                             <td>{{ forloop.counter }}</td>
-                            <td><a href="{% url 'task_body' task.pk %}" class="text-decoration-none text-dark fw-bold">{{ task.title }}</a></td>
+                            <td><a href="{% url 'task_body' task.pk %}" class=" task-title fw-bold">{{ task.title }}</a></td>
                             {% if task.completed %}
                                 <td><span class="badge bg-success">Completed</span></td>
                             {% else %}

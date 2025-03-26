@@ -1,23 +1,28 @@
 {% extends "taskmanager/base.html" %}
-{% block title %}{{tasks.title}}{% endblock title %}
-{% block content %}
 
-        <div class="container">
-            <div class="task-details">
-                <h4>Task Name:{{ task.title}}</h4>
-                
-                <p><strong>Details:</strong> {{ task.description}}</p>
-                <p><strong>Status:</strong> 
-                    {% if task.completed %}
-                        <span class="completed">Completed</span>
-                    {% else %}
-                        <span class="pending">Pending</span>
-                    {% endif %}
-                </p>
-                <a href="{% url 'edit_task' task.pk %}">Edit</a>
-                <a href="{% url 'delete_task' task.pk %}">Delete</a>
-            </div>
+{% block title %}{{ tasks.title }}{% endblock title %}
+
+{% block content %}
+    <div class="container mt-5">
+
+        <div class="mb-3">
+            <h5><strong>Task:</strong> {{ task.title }}</h5>
+            <p><strong>Details:</strong> {{ task.description }}</p>
         </div>
 
-{% endblock content %}
+        <div class="mb-3">
+            <p><strong>Status:</strong> 
+                {% if task.completed %}
+                    <span class="badge bg-success">Completed</span>
+                {% else %}
+                    <span class="badge bg-warning text-dark">Pending</span>
+                {% endif %}
+            </p>
+        </div>
 
+        <div class="d-flex justify-content-start gap-3">
+            <a href="{% url 'edit_task' task.pk %}" class="btn btn-primary">Edit</a>
+            <a href="{% url 'delete_task' task.pk %}" class="btn btn-danger">Delete</a>
+        </div>
+    </div>
+{% endblock content %}

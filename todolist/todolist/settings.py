@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'taskmanager',
     'widget_tweaks',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -117,3 +118,5 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 TIME_ZONE = 'Asia/Kathmandu'
+LOGIN_REDIRECT_URL = 'dashboard'
+LOGOUT_REDIRECT_URL = 'home'

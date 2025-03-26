@@ -5,4 +5,6 @@ from django.urls import path,include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('taskmanager.urls')),
+    path('users/', include('users.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
 ]

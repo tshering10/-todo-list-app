@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 body {
-    background-color: whitesmoke;
+    background-color: rgba(205, 197, 197, 0.589);
 }
 .task-title {
     text-decoration: none;
@@ -16,7 +16,7 @@ body {
 }
 
 /* edit page */
-.edit-task-container {
+.task-container {
     padding: 30px;
     border-radius: 8px;  
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
@@ -48,4 +48,19 @@ table th,tr,td{
 }
 .add-task a:hover {
     color: blue;
+}
+
+/* styling signup page and login page*/
+.credentials {
+    padding: 20px;
+    border-radius: 8px;  
+    box-shadow: 0 12px 24px rgba(21, 15, 15, 0.2);
+    background-color: #939798; 
+    display: flex;
+    justify-content: center;
+    width: 30%;
+    max-width: 800px;
+    margin: 0 auto;
+    border-radius: 20px;
+    height: fit-content;
 }

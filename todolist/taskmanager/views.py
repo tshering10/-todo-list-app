@@ -4,16 +4,18 @@ from django.contrib import messages
 from .models import Task
 # Create your views here.
 def home(request):
-    tasks = Task.objects.all().order_by('-pk')
-    return render(request, 'taskmanager/home.html', {'tasks': tasks})
+    return render(request, 'taskmanager/home.html')
 
+def dashboard(request):
+    tasks = Task.objects.all().order_by('-pk')
+    return render(request, 'taskmanager/dashboard.html',  {'tasks': tasks})
 
 def add_task(request):
     if request.method == 'POST':
         form = TaskForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('home')
+            return redirect('dashboard')
     else:
         form = TaskForm()     
     return render(request, 'taskmanager/addtask.html',{'form': form})
@@ -25,7 +27,7 @@ def edit_task(request, pk):
         form = TaskForm(request.POST, instance=task)
         if form.is_valid():
             form.save()
-            return redirect('home')
+            return redirect('dashboard')
     else:
         form = TaskForm(instance=task)
     return render(request, 'taskmanager/edit.html', {'form': form})
@@ -34,7 +36,7 @@ def delete_task(request, pk):
     task_to_delete = get_object_or_404(Task, pk=pk)
     if request.method=='POST':
         task_to_delete.delete()
-        return redirect('home')
+        return redirect('dashboard')
     return render(request, 'taskmanager/delete.html', {'task': task_to_delete})
 
 def task_details(request, pk):

@@ -1,40 +1,16 @@
 {% extends "taskmanager/base.html" %}
-{% block title %}My Todo{% endblock title %}
+{% block title %}Home{% endblock title %}
+
 {% block content %}
-   
-    <div class="container mt-5">
-        <h1 class="mb-3 text-center">Your Tasks</h1>
-        <div class="add-task d-flex justify-content-right ms-1 mb-2">
-            <a href="{% url "add_task" %}" class=' text-decoration-none'>+ New</a>
-        </div>
-        {% if tasks %}
-            <table class="table table-bordered table-striped">
-                <thead class="thead-dark">
-                    <tr>
-                        <th scope="col" >SN</th>
-                        <th scope="col">Task</th>
-                        <th scope="col">Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for task in tasks %}
-                        <tr>
-                            <td>{{ forloop.counter }}</td>
-                            <td><a href="{% url 'task_body' task.pk %}" class=" task-title fw-bold">{{ task.title }}</a></td>
-                            {% if task.completed %}
-                                <td><span class="badge bg-success">Completed</span></td>
-                            {% else %}
-                                <td><span class="badge bg-warning text-dark">Pending</span></td>
-                            {% endif %}
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        {% else %}
-            <div class="alert alert-info" role="alert">
-                No tasks available. Please add a task!
+    <div class="container-fluid ">
+        <!-- Hero Section -->
+        <div class="row  text-center py-3 mt-5">
+            <div class="col-md-12">
+                <h1 class="display-5">Welcome to Your Todo App!</h1>
+                <p class="lead">Efficiently manage your tasks and stay on top of your goals.</p>
+                <a href="{% url 'signup' %}" class="btn btn-lg btn-success mt-4">Get Started</a>
             </div>
-        {% endif %}
-                     
-    </div>
+        </div>
+          
+      
 {% endblock content %}

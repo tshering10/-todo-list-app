@@ -1,11 +1,11 @@
 {% extends "taskmanager/base.html" %}
 {% block title %}My Todo{% endblock title %}
 {% block content %}
-   
+{% if request.user.is_authenticated %}
     <div class="container mt-5">
         <h1 class="mb-3 text-center">Your Tasks</h1>
         <div class="add-task d-flex justify-content-right ms-1 mb-2">
-            <a href="{% url "add_task" %}" class=' text-decoration-none'>+ New</a>
+            <a href="{% url "add_task" %}" class=' text-decoration-none'><span style="font-size: 20px; ">&#43;</span>New</a>
         </div>
         {% if tasks %}
             <table class="table table-bordered table-striped">
@@ -20,7 +20,7 @@
                     {% for task in tasks %}
                         <tr>
                             <td>{{ forloop.counter }}</td>
-                            <td><a href="{% url 'task_body' task.pk %}" class=" task-title fw-bold">{{ task.title }}</a></td>
+                            <td><a href="{% url 'task_body' task.pk %}" class=" task-title text-dark">{{ task.title }}</a></td>
                             {% if task.completed %}
                                 <td><span class="badge bg-success">Completed</span></td>
                             {% else %}
@@ -37,4 +37,5 @@
         {% endif %}
                      
     </div>
+{% endif %}
 {% endblock content %}

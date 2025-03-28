@@ -7,8 +7,13 @@
     <title>{% block title %}{% endblock title %}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static "css/styles.css" %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <style>
-      
+      body {
+        font-family: "Poppins";
+      }
     </style>
   </head>
   <body>
@@ -39,32 +44,37 @@
                   {% csrf_token %}
                   <button type='submit' class='naav-link btn btn-link text-decoration-none text-white'>Logout</button>
                 </form>
+
+                <form  class="d-flex" role="search" method='POST' action="{% url "search" %}">
+                  {% csrf_token %}
+                  <input class="form-control me-2" type="search" placeholder="Search your todos" aria-label="Search" name='query'>
+                  <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
               {% else %}
                 <li class="nav-item">
                   <a class="nav-link active" href="{% url "signup" %}">Register</a>
                 </li>
 
-                <li class="nav-item">
-                  <a class="nav-link active" href="{% url "login" %}">Login</a>
+                <li class="nav-item mr-5">
+                  <a class="nav-link active " href="{% url "login" %}">Login</a>
                 </li>
               {% endif %}
               
             </ul>
-            <form  class="d-flex" role="search" method='POST' action="{% url "search" %}">
-              {% csrf_token %}
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name='query'>
-              <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
+            
           </div>
         </div>
       </nav>
-      {% if messages %}
-          <div class="alert alert-info" role="alert">
-            {% for msg in messages %}
-                {{ msg }}
-            {% endfor %}
-        </div>
-      {% endif %}
+    {% if messages %}
+      <div class="alert-container">
+          {% for message in messages %}
+              <div class="alert alert-{{ message.tags }}">
+                  {{ message }}
+              </div>
+          {% endfor %}
+      </div>
+  {% endif %}
+
     {% block content %}
     {% endblock content %}
 

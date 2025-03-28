@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from .form import TaskForm
 from django.contrib import messages
 from .models import Task
@@ -6,15 +7,19 @@ from .models import Task
 def home(request):
     return render(request, 'taskmanager/home.html')
 
-def dashboard(request):
-    tasks = Task.objects.all().order_by('-pk')
-    return render(request, 'taskmanager/dashboard.html',  {'tasks': tasks})
 
+def dashboard(request):
+    tasks = Task.objects.filter(user=request.user).order_by('completed')
+    return render(request, 'taskmanager/dashboard.html',  {'tasks': tasks})
+    
+    
 def add_task(request):
     if request.method == 'POST':
         form = TaskForm(request.POST)
         if form.is_valid():
+            form.instance.user = request.user
             form.save()
+            messages.success(request, 'New task added successfully!')
             return redirect('dashboard')
     else:
         form = TaskForm()     
@@ -27,6 +32,7 @@ def edit_task(request, pk):
         form = TaskForm(request.POST, instance=task)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Your task is updated successfully!')
             return redirect('dashboard')
     else:
         form = TaskForm(instance=task)
@@ -36,6 +42,7 @@ def delete_task(request, pk):
     task_to_delete = get_object_or_404(Task, pk=pk)
     if request.method=='POST':
         task_to_delete.delete()
+        messages.success(request, 'Your task deleted successfully!')
         return redirect('dashboard')
     return render(request, 'taskmanager/delete.html', {'task': task_to_delete})
 
@@ -54,7 +61,7 @@ def search_view(request):
             # Search for posts with titles that match the query (case-insensitive)
             tasks = Task.objects.filter(title__icontains=query)
             if not tasks:               
-                messages.warning(request, 'No such tasks available.')
+                messages.info(request, 'No such tasks available.')
 
     context = {
         'tasks': tasks,

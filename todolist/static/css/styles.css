@@ -8,11 +8,12 @@ body {
 }
 .task-title {
     text-decoration: none;
-    color: black
+    color: black;
     
 }
 .task-title:hover {
     text-decoration: underline;
+    
 }
 
 /* edit page */

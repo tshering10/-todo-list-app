@@ -3,8 +3,9 @@
 {% block title %}{{ tasks.title }}{% endblock title %}
 
 {% block content %}
-    <div class="container mt-5">
-
+    <div class="container mt-5 border shadow p-3 rounded bg-white">
+        <a href="{% url "dashboard" %}" class='text-decoration-none fs-2 fw-bold '>&#8592;</a>
+        <p><strong class='text-decoration-underline'>Task Details</strong></p>
         <div class="mb-3">
             <h5><strong>Task:</strong> {{ task.title }}</h5>
             <p><strong>Details:</strong> {{ task.description }}</p>
